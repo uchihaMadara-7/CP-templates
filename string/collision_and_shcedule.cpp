@@ -77,6 +77,10 @@ void setIO(string s = "") {
 	// if (sz(s)) setIn(s+".in"), setOut(s+".out"); // for USACO
 }
 
+/* 
+    https://usaco.org/index.php?page=viewproblem2&cpid=1061
+*/
+
 int main() {
     setIO();
 
