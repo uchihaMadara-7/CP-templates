@@ -1,1 +1,1 @@
-# CP-templates
+# CP Templates
