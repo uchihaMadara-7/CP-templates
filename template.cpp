@@ -24,6 +24,7 @@ using ll = long long;
 using db = long double;
 
 using pi = pair<int, int>;
+using ps = pair<string, string>;
 #define mp make_pair
 #define f first
 #define s second
@@ -34,8 +35,14 @@ using vi = V<int>;
 using vs = V<string>;
 using vb = V<bool>;
 using vpi = V<pi>;
+using vps = V<ps>;
 using vvi = V<V<int>>;
 using vvs = V<V<string>>;
+
+//  uordered sets and maps
+tcT> using uset = unordered_set<T>;
+using useti = uset<int>;
+using usets = uset<string>;
 
 #define sz(x) int((x).size())
 #define all(x) begin(x), end(x)
@@ -74,6 +81,10 @@ tcT, class... U> void debug(const T& t, const U&... u) {
 }
 
 // input/reading
+tcT> void input(T &x) { cin >> x; }
+tcT, class... U> void input(T &x, U&... u) {
+	cin >> x; input(u...);
+}
 tcT> void iar(T &ar, int n) {
     rep(i,n) cin >> ar[i];
 }
