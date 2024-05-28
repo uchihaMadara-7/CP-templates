@@ -1,3 +1,4 @@
+// https://usaco.org/index.php?page=viewproblem2&cpid=526
 #include <algorithm>
 #include <array>
 #include <bitset>

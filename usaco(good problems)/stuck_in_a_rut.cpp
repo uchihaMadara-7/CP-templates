@@ -1,3 +1,4 @@
+// https://usaco.org/index.php?page=viewproblem2&cpid=1061
 #include <algorithm>
 #include <array>
 #include <bitset>
@@ -76,10 +77,6 @@ void setIO(string s = "") {
 	// ex. try to read letter into int
 	// if (sz(s)) setIn(s+".in"), setOut(s+".out"); // for USACO
 }
-
-/* 
-    https://usaco.org/index.php?page=viewproblem2&cpid=1061
-*/
 
 int main() {
     setIO();
