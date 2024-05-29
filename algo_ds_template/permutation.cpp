@@ -115,8 +115,40 @@ void setIO(string s = "") {
     if (sz(s)) setIn(s+".in"), setOut(s+".out"); // for USACO
 }
 
+int n;
+vi ar, per;
+vb visited;
+
+// recursive
+void permutation() {
+    if (sz(per) == n) {
+        debug(per, sz(per));
+        return;
+    }
+    rep(i,n) {
+        if (visited[i]) continue;
+        visited[i] = true;
+        per.pb(ar[i]);
+        permutation();
+        per.pob();
+        visited[i] = false;
+    }
+}
+
 int main() {
     setIO();
+
+    input(n);
+    ar.resize(n);
+    rseq(ar,1);
+
+    // iterative
+    do {
+        debug(ar, sz(ar));
+    } while(next_permutation(ar.begin(), ar.end()));
+
+    visited.assign(n, false);
+    permutation();
 
     return 0;
 }

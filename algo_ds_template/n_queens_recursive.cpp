@@ -61,8 +61,6 @@ using usets = uset<string>;
 #define each(a,x) for (auto& a: x)
 
 const int dx[4]{1,0,-1,0}, dy[4]{0,1,0,-1}; // for every grid problem!!
-#define seq(a) iota(a.begin(), a.end(), 0)
-#define rseq(a, start) iota(a.begin(), a.end(), start)
 
 const int MOD = 1e9+7;
 const int MX = (int)2e5+5;
@@ -77,7 +75,6 @@ tcT> bool ckmax(T& a, const T& b) {
 tcT> void cpy(T &src, T &dest) {}
 
 //  output/debug
-void debug(vi ar, int n) { rep(i,n) cout << ar[i] << " "; cout << endl;}
 tcT> void debug(const T &t) { cout << t << endl; }
 tcT, class... U> void debug(const T& t, const U&... u) {
     cout << t << " "; debug(u...);
@@ -97,10 +94,7 @@ tcT> void iarp(T &ar, int n) {
 tcT> void ipar(T &ar, int n) {
     using elment_type = typename T::value_type;
     elment_type x;
-    rep(i,n) {
-        cin >> x;
-        ar.pb(x);
-    }
+    rep(i,n) { cin >> x; ar.pb(x); }
 }
 
 void unsyncIO() { cin.tie(0)->sync_with_stdio(0); }
@@ -111,12 +105,35 @@ void setIO(string s = "") {
     unsyncIO();
     // cin.exceptions(cin.failbit);
     // throws exception when do smth illegal
-    // ex. try to read letter into int
+	// ex. try to read letter into int
     if (sz(s)) setIn(s+".in"), setOut(s+".out"); // for USACO
+}
+
+int n = 8;
+vs ar(n);
+vb cols(n, false), diag1(2*n, false), diag2(2*n, false);
+int ans = 0;
+
+void nqueens(int row) {
+    if (row == n) {
+        ++ans;
+        return;
+    }
+    rep(col,n) {
+        if (cols[col] || diag1[row+col] || diag2[row-col+n-1]) continue;
+        if (ar[row][col] == '*') continue;
+        cols[col] = diag1[row+col] = diag2[row-col+n-1] = true;
+        nqueens(row+1);
+        cols[col] = diag1[row+col] = diag2[row-col+n-1] = false;
+    }
 }
 
 int main() {
     setIO();
+
+    iar(ar, 8);
+    nqueens(0);
+    debug(ans);
 
     return 0;
 }

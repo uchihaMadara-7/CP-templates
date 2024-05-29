@@ -62,7 +62,6 @@ using usets = uset<string>;
 
 const int dx[4]{1,0,-1,0}, dy[4]{0,1,0,-1}; // for every grid problem!!
 #define seq(a) iota(a.begin(), a.end(), 0)
-#define rseq(a, start) iota(a.begin(), a.end(), start)
 
 const int MOD = 1e9+7;
 const int MX = (int)2e5+5;
@@ -77,7 +76,7 @@ tcT> bool ckmax(T& a, const T& b) {
 tcT> void cpy(T &src, T &dest) {}
 
 //  output/debug
-void debug(vi ar, int n) { rep(i,n) cout << ar[i] << " "; cout << endl;}
+void debug(vi &ar, int n) { rep(i,n) cout << ar[i] << " "; cout << endl;}
 tcT> void debug(const T &t) { cout << t << endl; }
 tcT, class... U> void debug(const T& t, const U&... u) {
     cout << t << " "; debug(u...);
@@ -117,6 +116,20 @@ void setIO(string s = "") {
 
 int main() {
     setIO();
+
+    int n;
+    input(n);
+    vi ar(n);
+    seq(ar);
+
+    rep(i, 1<<n) {
+        vi subset;
+        rep(j, n) {
+            if (i&(1<<j)) subset.pb(ar[j]);
+        }
+        debug(subset, sz(subset));
+    }
+    // debug(1<<n);
 
     return 0;
 }
