@@ -48,7 +48,7 @@ using usets = uset<string>;
 #define sz(x) int((x).size())
 #define all(x) begin(x), end(x)
 #define sor(x) sort(all(x))
-#define rsor(x) sort(rbegin(x), rend(x))
+#define rsort(x) sort(rbegin(x), rend(x))
 #define rsz resize
 #define pb push_back
 #define pob pop_back
@@ -116,8 +116,30 @@ void setIO(string s = "") {
     if (sz(s)) setIn(s+".in"), setOut(s+".out"); // for USACO
 }
 
+/*
+E.g. [1,2,3]
+Every element arr[i] appears in two types of subsets:
+i)  In subarrays beginning with arr[i]. There are
+    (n-i) such subsets. For example [2] appears
+    in [2] and [2, 3].
+ii) In (n-i)*i subarrays where this element is not
+    first element. For example [2] appears in [1, 2] and [1, 2, 3].
+*/
+
+ll subarray_sum(vi &ar, int n) {
+    ll ans = 0;
+    rep(i,n) {
+        ans += (n-i)*(i+1)*ar[i];
+    }
+    return ans;
+}
+
 int main() {
     setIO();
-
+    int n;
+    val(n);
+    vi ar(n);
+    vala(ar,n);
+    debug(subarray_sum(ar, n));
     return 0;
 }

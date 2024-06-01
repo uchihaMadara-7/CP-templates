@@ -32,7 +32,6 @@ using ps = pair<string, string>;
 #define tcT template<class T
 tcT> using V = vector<T>;
 using vi = V<int>;
-using vll = V<ll>;
 using vs = V<string>;
 using vb = V<bool>;
 using vpi = V<pi>;
@@ -48,7 +47,6 @@ using usets = uset<string>;
 #define sz(x) int((x).size())
 #define all(x) begin(x), end(x)
 #define sor(x) sort(all(x))
-#define rsor(x) sort(rbegin(x), rend(x))
 #define rsz resize
 #define pb push_back
 #define pob pop_back
@@ -95,17 +93,27 @@ tcT, class... U> void debug(const T& t, const U&... u) {
 }
 
 // input/reading
-tcT> void val(T &x) { cin >> x; }
-tcT, class... U> void val(T &x, U&... u) { val(x); val(u...); }
-tcT> void vala(T &ar, int n) { rep(i,n) val(ar[i]); }
-tcT> void valap(T &ar, int n) { rep(i, n) val(ar[i].first, ar[i].second); }
-tcT> void pbval(T &ar, int n) {
+tcT> void input(T &x) { cin >> x; }
+tcT, class... U> void input(T &x, U&... u) {
+    cin >> x; input(u...);
+}
+tcT> void iar(T &ar, int n) {
+    rep(i,n) cin >> ar[i];
+}
+tcT> void iarp(T &ar, int n) {
+    rep(i, n) cin >> ar[i].first >> ar[i].second;
+}
+tcT> void ipar(T &ar, int n) {
     using elment_type = typename T::value_type;
     elment_type x;
-    rep(i,n) { val(x); ar.pb(x); }
+    rep(i,n) {
+        cin >> x;
+        ar.pb(x);
+    }
 }
 
 void unsyncIO() { cin.tie(0)->sync_with_stdio(0); }
+
 void setIn(string s)  { freopen(s.c_str(),"r",stdin); }
 void setOut(string s) { freopen(s.c_str(),"w",stdout); }
 void setIO(string s = "") {
@@ -116,8 +124,24 @@ void setIO(string s = "") {
     if (sz(s)) setIn(s+".in"), setOut(s+".out"); // for USACO
 }
 
+int and_in_range(int l, int r) {
+    int lbits, rbits, ans = 0;
+    while (l&&r) {
+        lbits = bits(l);
+        rbits = bits(r);
+        if (lbits != rbits) return ans;
+        int tmp = p2(lbits);
+        ans += tmp;
+        l -= tmp;
+        r -= tmp;
+    }
+    return ans;
+}
+
 int main() {
     setIO();
-
+    int l,r;
+    input(l,r);
+    debug(and_in_range(l,r));
     return 0;
 }

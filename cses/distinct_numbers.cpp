@@ -32,7 +32,6 @@ using ps = pair<string, string>;
 #define tcT template<class T
 tcT> using V = vector<T>;
 using vi = V<int>;
-using vll = V<ll>;
 using vs = V<string>;
 using vb = V<bool>;
 using vpi = V<pi>;
@@ -48,7 +47,7 @@ using usets = uset<string>;
 #define sz(x) int((x).size())
 #define all(x) begin(x), end(x)
 #define sor(x) sort(all(x))
-#define rsor(x) sort(rbegin(x), rend(x))
+#define rsort(x) sort(rbegin(x), rend(x))
 #define rsz resize
 #define pb push_back
 #define pob pop_back
@@ -118,6 +117,11 @@ void setIO(string s = "") {
 
 int main() {
     setIO();
-
+    int n;
+    val(n);
+    vi ar(n);
+    vala(ar, n);
+    set<int> st(all(ar));
+    debug(sz(st));
     return 0;
 }
