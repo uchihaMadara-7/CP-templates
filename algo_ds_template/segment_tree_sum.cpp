@@ -140,6 +140,44 @@ void setIO(string s = "") {
     setIn(s + ".in"), setOut(s + ".out");  // for USACO
 }
 
+const int MAXN = static_cast<int>(1e5);
+int n, ar[MAXN], sgt[4*MAXN];
+
+void build(int index, int left, int right) {
+    if (left == right) {
+        sgt[index] = ar[left];
+        return;
+    }
+    int mid = left + (right-left)/2;
+    int lindex = 2*index;
+    int rindex = lindex+1;
+    build(lindex, left, mid);
+    build(rindex, mid+1, right);
+    sgt[index] = sgt[lindex] + sgt[rindex];
+}
+
+int sum(int index, int left, int right, int l, int r) {
+    if (l > r) return 0;
+    if (l == left && r == right) return sgt[index];
+    int mid = left + (right-left)/2;
+    int lindex = 2*index;
+    int rindex = lindex+1;
+    return sum(lindex, left, mid+1, l, min(r, mid))
+        + sum(rindex, mid+1, right, max(l, mid+1), r);
+}
+
+void update(int index, int left, int right, int pos, int value) {
+    if (left == right) {
+        sgt[index] = value;
+    }
+    int mid = left + (right-left)/2;
+    int lindex = 2*index;
+    int rindex = lindex+1;
+    if (pos <= mid) update(lindex, left, mid, pos, value);
+    else update(rindex, mid+1, right, pos, value);
+    sgt[index] = sgt[lindex] + sgt[rindex];
+}
+
 int main() {
     setIO();
 

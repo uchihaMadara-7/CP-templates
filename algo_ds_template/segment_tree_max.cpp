@@ -140,6 +140,53 @@ void setIO(string s = "") {
     setIn(s + ".in"), setOut(s + ".out");  // for USACO
 }
 
+// Finding the maximum and the number of times it appears
+const int MAXN = static_cast<int>(1e5);
+pi sgt[4*MAXN];
+int n, ar[MAXN];
+
+pi combine(pi a, pi b) {
+    if (a.f > b.f) return a;
+    if (b.f > a.f) return b;
+    return mp(a.f, a.s+b.s);
+}
+
+void build(int index, int left, int right) {
+    if (left == right) {
+        sgt[index] = mp(ar[left], 1);
+        return;
+    }
+    int mid = left + (right-left)/2;
+    int lindex = 2*index;
+    int rindex = lindex+1;
+    build(lindex, left, mid);
+    build(rindex, mid+1, right);
+    sgt[index] = combine(sgt[lindex], sgt[rindex]);
+}
+
+pi get_max(int index, int left, int right, int l, int r) {
+    if (l > r) return mp(INT_MIN, 0);
+    if (l == left && r == right) return sgt[index];
+    int mid = left + (right-left)/2;
+    int lindex = 2*index;
+    int rindex = lindex+1;
+    return combine(get_max(lindex, left, mid, l, min(mid, r)),
+        get_max(rindex, mid+1, right, max(l, mid+1), r));
+}
+
+void update(int index, int left, int right, int pos, int value) {
+    if (left == right) {
+        sgt[index] = mp(value, 1);
+        return;
+    }
+    int mid = left + (right-left)/2;
+    int lindex = 2*index;
+    int rindex = lindex+1;
+    if (pos <= mid) update(lindex, left, mid, pos, value);
+    else update(rindex, mid+1, right, pos, value);
+    sgt[index] = combine(sgt[lindex], sgt[rindex]);
+}
+
 int main() {
     setIO();
 

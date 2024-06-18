@@ -124,6 +124,16 @@ void setIO(string s = "") {
     if (sz(s)) setIn(s+".in"), setOut(s+".out"); // for USACO
 }
 
+ll solve(int l, int r) {
+    ll ans=0;
+    rep(i,32) {
+        if ((l & (1LL << i)) || (r & (1LL << i)) || (l >> (i + 1) != r >> (i + 1))) {
+            ans |= (1LL << i);
+        }
+    }
+    return ans;
+}
+
 int or_in_range(int l, int r) {
     if (l == r) return l;
     int lbits, rbits, ans = 0;
